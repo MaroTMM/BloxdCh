@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bloxdch</title>
+    <h1>Hello</h1>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+            font-size: 36px;
+            opacity: 0; /* Initially invisible */
+            transform: translateY(50px); /* Start below */
+            animation: slideUp 2s ease-out forwards, scaleUp 2s ease-out forwards, textColorChange 2s ease-out forwards;
+        }
+
+        .logo-container img {
+            width: 100px;
+            height: auto;
+            margin-right: 10px;
+        }
+
+        .logo-text {
+            color: #333;
+            font-size: 48px;  /* Increased font size to make the name longer */
+            letter-spacing: 5px;  /* Increased letter spacing to make it wider */
+            opacity: 0; /* Start invisible */
+            animation: textColorChange 2s ease-out forwards; /* Color change */
+        }
+
+        /* Animation for sliding up */
+        @keyframes slideUp {
+            0% {
+                opacity: 0;
+                transform: translateY(50px); /* Start below */
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0); /* Move up to the normal position */
+            }
+        }
+
+        /* Animation for scaling up */
+        @keyframes scaleUp {
+            0% {
+                transform: scale(0.8); /* Start smaller */
+            }
+            100% {
+                transform: scale(1); /* Normal size */
+            }
+        }
+
+        /* Animation for changing text color */
+        @keyframes textColorChange {
+            0% {
+                opacity: 0;
+                color: #333;
+            }
+            100% {
+                opacity: 1;
+                color: #00aaff; /* Change to bright blue */
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- BloxdCh Logo and Name -->
+    <div class="logo-container">
+        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/4/41/Bloxd.io_Logo.jpeg/1200px-Bloxd.io_Logo.jpeg" alt="Bloxd.io Logo">
+        <span class="logo-text">BloxdCh</span>
+    </div>
+
+    <script>
+        // JavaScript to handle page redirection after animation finishes
+        const logoContainer = document.querySelector('.logo-container');
+
+        // Listen for the end of the animation
+        logoContainer.addEventListener('animationend', () => {
+            // Redirect to a new page (change 'nextpage.html' to your target URL)
+            window.location.href = 'nextpage.html';  // Replace 'nextpage.html' with the actual next page URL
+        });
+    </script>
+</body>
+</html>

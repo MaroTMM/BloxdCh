@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bloxdch</title>
+    
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .sidebar {
+            width: 200px;
+            height: 100vh;
+            background-color: #222;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 20px;
+        }
+
+        .sidebar a {
+            text-decoration: none;
+            color: white;
+            font-size: 16px;
+            width: 100%;
+            text-align: center;
+            padding: 15px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .sidebar a:hover {
+            background-color: #333;
+        }
+
+        .sidebar a img {
+            margin-right: 10px;
+            width: 20px;
+            height: 20px;
+        }
+
+        .sidebar a span {
+            margin-left: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        </a>
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Your Page</title>
+        </head>
+        <body>
+        
+            <!-- Your content here -->
+            <div>
+                <!-- Example of T_Pack Link -->
+                <a href="page4.html">
+                   <img src="https://i.redd.it/z2hmv8as3j5d1.png" alt="">
+                    <span>T_Pack</span>
+                </a>
+            </div>
+        
+            <!-- More content can go here -->
+        
+        </body>
+        </html>
+        
+            
+        </a>
+        <div class="sidebar">
+            <a href="2Page.html" id="wiki-link">Wiki</a>
+        </a>
+        <a href="3Page.html" id="Update-Bloxd">Updates Bloxd</a>
+        <a href="5Page.html" id="Games">Games</a>
+        </a>
+        </a>
+    </div>
+</body>
+</html>
+    <style>
+        /* Initial button style */
+        .toggle-button {
+            background-color: black; /* Dark button background by default */
+            color: white; /* White text */
+            border: 2px solid white; /* White border */
+            padding: 10px 20px;
+            font-size: 16px;
+            text-align: center;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Style when the button has a dark background */
+        .dark {
+            background-color: black;
+            color: white;
+        }
+
+        /* Style when the button has a white background */
+        .light {
+            background-color: white;
+            color: black;
+            border: 2px solid black;
+        }
+        
+        /* Style for the page background */
+        body.dark-background {
+            background-color: black;
+            color: white; /* Text color changes to white on dark background */
+        }
+
+        body.light-background {
+            background-color: white;
+            color: black; /* Text color changes to black on light background */
+        }
+    </style>
+</head>
+<body class="light-background"> <!-- Default page background is light -->
+
+    <!-- Button with toggle functionality -->
+    <button id="toggleButton" class="toggle-button dark" onclick="toggleBackground()">Color Bage</button>
+
+    <script>
+        function toggleBackground() {
+            var button = document.getElementById('toggleButton');
+            var body = document.body;
+
+            // Toggle the button's background color by switching classes
+            if (button.classList.contains('dark')) {
+                button.classList.remove('dark');
+                button.classList.add('light');
+                body.classList.remove('light-background');
+                body.classList.add('dark-background');
+            } else {
+                button.classList.remove('light');
+                button.classList.add('dark');
+                body.classList.remove('dark-background');
+                body.classList.add('light-background');
+            }
+        }
+    </script>
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Button</title>
+    <style>
+        .youtube-button {
+            background-color: #FF0000;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .youtube-button:hover {
+            background-color: #cc0000;
+        }
+    </style>
+</head>
+<body>
+    <button class="youtube-button" onclick="window.location.href='https://www.youtube.com/@bloxdMc12'">
+        My Channle
+    </button>
+
+  

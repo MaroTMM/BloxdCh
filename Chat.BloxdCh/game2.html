@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Game 2</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f0f8ff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .game-container {
+      position: relative;
+      width: 400px;
+      height: 600px;
+      background-color: #e6e6fa;
+      border: 2px solid #000;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .player {
+      position: absolute;
+      bottom: 20px;
+      left: 175px;
+      width: 50px;
+      height: 50px;
+      background-color: #ff4500;
+      border-radius: 5px;
+    }
+
+    .block {
+      position: absolute;
+      top: -50px;
+      width: 50px;
+      height: 50px;
+      background-color: #000;
+      border-radius: 50%;
+    }
+
+    .score {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      font-size: 20px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .timer {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 20px;
+      font-weight: bold;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <div class="game-container">
+    <div class="score">Score: 0</div>
+    <div class="timer">Timer: 30</div>
+    <div class="player"></div>
+  </div>
+
+  <script>
+    const gameContainer = document.querySelector('.game-container');
+    const player = document.querySelector('.player');
+    const scoreDisplay = document.querySelector('.score');
+    let score = 0;
+    let gameOver = false;
+
+    // Timer variables
+    let timer = 0;
+    let timerInterval;
+    let timeLimit = 30; // الوقت المحدد (بالثواني) بعده يتم الانتقال إلى الصفحة الجديدة
+
+    // بدء العداد
+    function startTimer() {
+      timerInterval = setInterval(() => {
+        if (timer >= timeLimit) {
+          clearInterval(timerInterval);  // إيقاف العداد بعد انتهاء الوقت
+          window.location.href = "game3.html";  // الانتقال إلى الصفحة الثالثة
+          return;
+        }
+        timer++;
+        document.querySelector('.timer').textContent = `Timer: ${timeLimit - timer}`;  // عرض الوقت المتبقي
+      }, 1000);
+    }
+
+    // تحديث النقاط
+    function updateScore() {
+      score++;
+      scoreDisplay.textContent = `Score: ${score}`;
+
+      // التحقق إذا وصل اللاعب إلى 20 نقطة
+      if (score === 20) {
+        // التوجيه إلى game3.html عندما يصل اللاعب إلى 20 نقطة
+        window.location.href = "game3.html";
+      }
+    }
+
+    // تحريك اللاعب
+    document.addEventListener('keydown', (e) => {
+      if (gameOver) return;
+
+      const playerLeft = parseInt(window.getComputedStyle(player).getPropertyValue('left'));
+      if (e.key === 'ArrowLeft' && playerLeft > 0) {
+        player.style.left = `${playerLeft - 20}px`;
+      } else if (e.key === 'ArrowRight' && playerLeft < 350) {
+        player.style.left = `${playerLeft + 20}px`;
+      }
+    });
+
+    // إنشاء الكتل
+    function createBlock() {
+      const block = document.createElement('div');
+      block.classList.add('block');
+      block.style.left = `${Math.floor(Math.random() * 350)}px`;
+      gameContainer.appendChild(block);
+
+      let blockFallInterval = setInterval(() => {
+        if (gameOver) {
+          clearInterval(blockFallInterval);
+          return;
+        }
+
+        const blockTop = parseInt(window.getComputedStyle(block).getPropertyValue('top'));
+        const playerLeft = parseInt(window.getComputedStyle(player).getPropertyValue('left'));
+
+        // تحديث موضع الكتلة
+        block.style.top = `${blockTop + 5}px`;
+
+        // التحقق من التصادم
+        if (
+          blockTop > 530 &&
+          blockTop < 580 &&
+          parseInt(block.style.left) >= playerLeft - 50 &&
+          parseInt(block.style.left) <= playerLeft + 50
+        ) {
+          clearInterval(blockFallInterval);
+          gameOver = true;
+          alert(`Game Over! Your score: ${score}`);
+          window.location.href = "game3.html"; // Change the link to the second game
+        }
+
+        // حذف الكتلة إذا خرجت
+        if (blockTop > 600) {
+          clearInterval(blockFallInterval);
+          block.remove();
+          updateScore();  // استدعاء دالة تحديث النقاط
+        }
+      }, 30);
+    }
+
+    // إنشاء كتل بشكل دوري
+    setInterval(() => {
+      if (!gameOver) {
+        createBlock();
+      }
+    }, 1000);
+
+    // بدء المؤقت
+    startTimer();
+  </script>
+</body>
+</html>

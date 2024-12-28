@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Game 1</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f0f8ff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .start-screen, .game-container {
+      position: relative;
+      width: 90%;
+      height: 90%;
+      background-color: #e6e6fa;
+      border: 2px solid #000;
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .start-screen {
+      flex-direction: column;
+    }
+
+    .start-button {
+      padding: 15px 30px;
+      font-size: 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .start-button:hover {
+      background-color: #45a049;
+    }
+
+    .box {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      background-color: #ff4500;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      animation: bounce 0.5s infinite;
+    }
+
+    .score {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      font-size: 20px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .timer {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 20px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .refresh-button {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .refresh-button:hover {
+      background-color: #45a049;
+    }
+
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="start-screen" id="startScreen">
+    <h1>Welcome to the Game!</h1>
+    <button class="start-button" id="startButton">Start</button>
+  </div>
+  <div class="game-container" id="gameContainer" style="display: none;">
+    <div class="score">Score: 0</div>
+    <div class="timer">Timer: 30</div>
+    <div class="box"></div>
+    <button class="refresh-button">Refresh</button>
+  </div>
+
+  <script>
+    const startScreen = document.getElementById('startScreen');
+    const gameContainer = document.getElementById('gameContainer');
+    const startButton = document.getElementById('startButton');
+    const box = document.querySelector('.box');
+    const scoreDisplay = document.querySelector('.score');
+    const timerDisplay = document.querySelector('.timer');
+    const refreshButton = document.querySelector('.refresh-button');
+    let score = 0;
+    let timeLeft = 30; // Number of seconds allowed for the game
+    let timer;
+
+    // Function to update the box position
+    function randomPosition() {
+      const containerWidth = gameContainer.offsetWidth;
+      const containerHeight = gameContainer.offsetHeight;
+      const x = Math.random() * (containerWidth - 50); // Box width is 50 pixels
+      const y = Math.random() * (containerHeight - 50);
+      return { x, y };
+    }
+
+    function moveBox() {
+      const { x, y } = randomPosition();
+      box.style.left = `${x}px`;
+      box.style.top = `${y}px`;
+    }
+
+    // Update score on click
+    box.addEventListener('click', () => {
+      score++;
+      scoreDisplay.textContent = `Score: ${score}`;
+      moveBox();
+    });
+
+    // Start the timer
+    function startTimer() {
+      timer = setInterval(() => {
+        timeLeft--;
+        timerDisplay.textContent = `Timer: ${timeLeft}`;
+        if (timeLeft <= 0) {
+          clearInterval(timer); // Stop the timer
+          alert("Time's up! You will be transferred to another game.");
+          window.location.href = "game2.html"; // Change the link to the second game
+        }
+      }, 1000);
+    }
+
+    // Refresh the game
+    function refreshGame() {
+      clearInterval(timer);
+      score = 0;
+      timeLeft = 30;
+      scoreDisplay.textContent = `Score: ${score}`;
+      timerDisplay.textContent = `Timer: ${timeLeft}`;
+      moveBox();
+      startTimer();
+    }
+
+    // Event listener for the refresh button
+    refreshButton.addEventListener('click', refreshGame);
+
+    // Event listener for the start button
+    startButton.addEventListener('click', () => {
+      startScreen.style.display = 'none';
+      gameContainer.style.display = 'block';
+      moveBox();
+      startTimer();
+    });
+  </script>
+</body>
+</html>

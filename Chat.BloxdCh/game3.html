@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catch the Falling Objects</title>
+    <style>
+        canvas {
+            display: block;
+            margin: auto;
+            background: #eee;
+        }
+        .buttons {
+            text-align: center;
+            margin-top: 20px;
+        }
+        button {
+            margin: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+        .loser-text {
+            display: none;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: red;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="gameCanvas" width="480" height="320"></canvas>
+    <div class="buttons">
+        <button id="normalButton">Normal</button>
+        <button id="hardButton">Hard</button>
+        <button id="refreshButton">Refresh</button>
+    </div>
+    <div class="loser-text" id="loserText">You Loser</div>
+    <script src="game.js"></script>
+</body>
+</html>
